@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SHANYRAK | Product Sourcing & Trading</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* ===== Header ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.96);
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ===== Logo ===== */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 3px;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border: 3px solid #222;
+            transform: rotate(45deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-mark span {
+            transform: rotate(-45deg);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: #777;
+        }
+
+        .language {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            background: #f7f7f7;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            padding: 80px 30px;
+        }
+
+        .hero-small {
+            font-size: 14px;
+            letter-spacing: 4px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            max-width: 800px;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            font-size: 19px;
+            color: #666;
+            margin-bottom: 35px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #222;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 3px;
+        }
+
+        .hero-button:hover {
+            background: #555;
+        }
+
+        /* Geometric decoration */
+        .shape-one {
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 2px solid #ddd;
+            right: 8%;
+            top: 18%;
+            transform: rotate(45deg);
+        }
+
+        .shape-two {
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border: 2px solid #ccc;
+            right: 18%;
+            bottom: 12%;
+            transform: rotate(45deg);
+        }
+
+        /* ===== General Section ===== */
+        section {
+            padding: 100px 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .section-title {
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            font-size: 13px;
+            letter-spacing: 3px;
+            color: #777;
+            font-weight: 600;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            margin-top: 8px;
+        }
+
+        /* ===== Products ===== */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .product-card {
+            border: 1px solid #e5e5e5;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            height: 260px;
+            background: #f3f3f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .product-info h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .product-info p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ===== About ===== */
+        .about {
+            background: #f7f7f7;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 42px;
+            margin-bottom: 25px;
+        }
+
+        .about-text p {
+            color: #666;
+            margin-bottom: 18px;
+        }
+
+        .about-box {
+            min-height: 350px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-box::before {
+            content: "S";
+            font-size: 180px;
+            font-weight: 800;
+            color: #eeeeee;
+        }
+
+        /* ===== Services ===== */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service {
+            padding: 35px;
+            border-top: 2px solid #222;
+            background: #fafafa;
+        }
+
+        .service-number {
+            font-size: 13px;
+            color: #888;
+            letter-spacing: 2px;
+        }
+
+        .service h3 {
+            margin: 15px 0;
+            font-size: 21px;
+        }
+
+        .service p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ===== Contact ===== */
+        .contact {
+            background: #222;
+            color: white;
+        }
+
+        .contact .section-title span {
+            color: #aaa;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+
+        .contact-info strong {
+            color: white;
+        }
+
+        .contact-note {
+            font-size: 28px;
+            line-height: 1.4;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: #111;
+            color: #888;
+            padding: 25px 30px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ===== Mobile ===== */
+        @media (max-width: 800px) {
+
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .products,
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            section {
+                padding: 70px 20px;
+            }
+
+            .hero-content {
+                padding: 70px 20px;
+            }
+
+            .shape-one {
+                opacity: 0.5;
+                right: -100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== Header ===== -->
+    <header>
+        <div class="header-inner">
+
+            <div class="logo">
+                <div class="logo-mark">
+                    <span>S</span>
+                </div>
+                SHANYRAK
+            </div>
+
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+
+                <select class="language" onchange="changeLanguage(this.value)">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                    <option value="tr">Türkçe</option>
+                </select>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="home">
+
+        <div class="shape-one"></div>
+        <div class="shape-two"></div>
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                SHANYRAK
+            </div>
+
+            <h1 id="hero-title">
+                专业的产品供应与贸易服务
+            </h1>
+
+            <p id="hero-text">
+                连接优质制造商与全球客户，为客户提供产品采购、供应链及出口贸易解决方案。
+            </p>
+
+            <a href="#products" class="hero-button" id="hero-button">
+                查看产品
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===== Products ===== -->
+    <section id="products">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>OUR PRODUCTS</span>
+                <h2 id="products-title">产品展示</h2>
+            </div>
+
+            <div class="products">
+
+                <div class="product-card">
+                    <div class="product-image">
+                        产品图片 01
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Name</h3>
+                        <p>产品描述将在这里显示。</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        产品图片 02
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Name</h3>
+                        <p>产品描述将在这里显示。</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        产品图片 03
+                    </div>
+                    <div class="product-info">
+                        <h3>Product Name</h3>
+                        <p>产品描述将在这里显示。</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===== About ===== -->
+    <section class="about" id="about">
+
+        <div class="container">
+
+            <div class="about-grid">
+
+                <div class="about-text">
+
+                    <div class="section-title">
+                        <span>ABOUT US</span>
+                        <h2 id="about-title">关于 SHANYRAK</h2>
+                    </div>
+
+                    <p id="about-text-1">
+                        SHANYRAK 专注于产品采购、供应链整合以及国际贸易服务。
+                    </p>
+
+                    <p id="about-text-2">
+                        我们与中国制造商建立合作关系，为全球客户寻找合适的产品和供应商，并协助完成从采购到出口的整个流程。
+                    </p>
+
+                </div>
+
+                <div class="about-box"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===== Services ===== -->
+    <section id="services">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>WHAT WE DO</span>
+                <h2 id="services-title">我们的服务</h2>
+            </div>
+
+            <div class="services">
+
+                <div class="service">
+                    <div class="service-number">01</div>
+                    <h3 id="service-1-title">产品采购</h3>
+                    <p id="service-1-text">
+                        根据客户需求寻找合适的产品、供应商和工厂。
+                    </p>
+                </div>
+
+                <div class="service">
+                    <div class="service-number">02</div>
+                    <h3 id="service-2-title">供应链服务</h3>
+                    <p id="service-2-text">
+                        协助客户进行产品确认、价格谈判、生产跟进和质量控制。
+                    </p>
+                </div>
+
+                <div class="service">
+                    <div class="service-number">03</div>
+                    <h3 id="service-3-title">出口贸易</h3>
+                    <p id="service-3-text">
+                        提供报关、物流、海运及国际贸易相关服务。
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===== Contact ===== -->
+    <section class="contact" id="contact">
+
+        <div class="container">
+
+            <div class="section-title">
+                <span>CONTACT</span>
+                <h2 id="contact-title">联系我们</h2>
+            </div>
+
+            <div class="contact-grid">
+
+                <div class="contact-info">
+
+                    <p>
+                        <strong>Company:</strong><br>
+                        SHANYRAK
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong><br>
+                        your@email.com
+                    </p>
+
+                    <p>
+                        <strong>WhatsApp:</strong><br>
+                        +86 XXX XXXX XXXX
+                    </p>
+
+                    <p>
+                        <strong>Location:</strong><br>
+                        Yiwu, China
+                    </p>
+
+                </div>
+
+                <div class="contact-note" id="contact-note">
+                    如果您正在寻找产品、供应商或中国工厂，欢迎联系我们。
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===== Footer ===== -->
+    <footer>
+        © 2026 SHANYRAK. All Rights Reserved.
+    </footer>
+
+
+    <!-- ===== Language Script ===== -->
+    <script>
+
+        const translations = {
+
+            zh: {
+                heroTitle: "专业的产品供应与贸易服务",
+                heroText: "连接优质制造商与全球客户，为客户提供产品采购、供应链及出口贸易解决方案。",
+                heroButton: "查看产品",
+
+                productsTitle: "产品展示",
+
+                aboutTitle: "关于 SHANYRAK",
+                aboutText1: "SHANYRAK 专注于产品采购、供应链整合以及国际贸易服务。",
+                aboutText2: "我们与中国制造商建立合作关系，为全球客户寻找合适的产品和供应商，并协助完成从采购到出口的整个流程。",
+
+                servicesTitle: "我们的服务",
+                service1Title: "产品采购",
+                service1Text: "根据客户需求寻找合适的产品、供应商和工厂。",
+                service2Title: "供应链服务",
+                service2Text: "协助客户进行产品确认、价格谈判、生产跟进和质量控制。",
+                service3Title: "出口贸易",
+                service3Text: "提供报关、物流、海运及国际贸易相关服务。",
+
+                contactTitle: "联系我们",
+                contactNote: "如果您正在寻找产品、供应商或中国工厂，欢迎联系我们。"
+            },
+
+            en: {
+                heroTitle: "Professional Product Sourcing & Trading",
+                heroText: "Connecting reliable manufacturers with global customers through sourcing, supply chain and international trading solutions.",
+                heroButton: "View Products",
+
+                productsTitle: "Our Products",
+
+                aboutTitle: "About SHANYRAK",
+                aboutText1: "SHANYRAK focuses on product sourcing, supply chain integration and international trading services.",
+                aboutText2: "We work with manufacturers in China to help global customers find suitable products and suppliers, supporting the process from sourcing to export.",
+
+                servicesTitle: "Our Services",
+                service1Title: "Product Sourcing",
+                service1Text: "Finding suitable products, suppliers and factories according to customer requirements.",
+                service2Title: "Supply Chain",
+                service2Text: "Supporting product confirmation, price negotiation, production follow-up and quality control.",
+                service3Title: "Export Trading",
+                service3Text: "Providing customs clearance, logistics, shipping and international trade services.",
+
+                contactTitle: "Contact Us",
+                contactNote: "Looking for products, suppliers or factories in China? Feel free to contact us."
+            },
+
+            tr: {
+                heroTitle: "Profesyonel Ürün Tedarik ve Dış Ticaret",
+                heroText: "Güvenilir üreticileri dünya çapındaki müşterilerle buluşturuyor, ürün tedariki, tedarik zinciri ve dış ticaret çözümleri sunuyoruz.",
+                heroButton: "Ürünleri Gör",
+
+                productsTitle: "Ürünlerimiz",
+
+                aboutTitle: "SHANYRAK Hakkında",
+                aboutText1: "SHANYRAK, ürün tedariki, tedarik zinciri yönetimi ve uluslararası ticaret hizmetlerine odaklanmaktadır.",
+                aboutText2: "Çin'deki üreticilerle çalışarak dünya genelindeki müşteriler için uygun ürün ve tedarikçiler buluyor, satın alma ve ihracat sürecinin tamamında destek sağlıyoruz.",
+
+                servicesTitle: "Hizmetlerimiz",
+                service1Title: "Ürün Tedariki",
+                service1Text: "Müşteri ihtiyaçlarına göre uygun ürün, tedarikçi ve fabrikaları araştırıyoruz.",
+                service2Title: "Tedarik Zinciri",
+                service2Text: "Ürün onayı, fiyat görüşmeleri, üretim takibi ve kalite kontrol süreçlerinde destek sağlıyoruz.",
+                service3Title: "İhracat ve Dış Ticaret",
+                service3Text: "Gümrük işlemleri, lojistik, deniz taşımacılığı ve dış ticaret hizmetleri sunuyoruz.",
+
+                contactTitle: "İletişim",
+                contactNote: "Çin'den ürün, tedarikçi veya fabrika mı arıyorsunuz? Bizimle iletişime geçebilirsiniz."
+            }
+
+        };
+
+
+        function changeLanguage(lang) {
+
+            const t = translations[lang];
+
+            document.getElementById("hero-title").textContent = t.heroTitle;
+            document.getElementById("hero-text").textContent = t.heroText;
+            document.getElementById("hero-button").textContent = t.heroButton;
+
+            document.getElementById("products-title").textContent = t.productsTitle;
+
+            document.getElementById("about-title").textContent = t.aboutTitle;
+            document.getElementById("about-text-1").textContent = t.aboutText1;
+            document.getElementById("about-text-2").textContent = t.aboutText2;
+
+            document.getElementById("services-title").textContent = t.servicesTitle;
+
+            document.getElementById("service-1-title").textContent = t.service1Title;
+            document.getElementById("service-1-text").textContent = t.service1Text;
+
+            document.getElementById("service-2-title").textContent = t.service2Title;
+            document.getElementById("service-2-text").textContent = t.service2Text;
+
+            document.getElementById("service-3-title").textContent = t.service3Title;
+            document.getElementById("service-3-text").textContent = t.service3Text;
+
+            document.getElementById("contact-title").textContent = t.contactTitle;
+            document.getElementById("contact-note").textContent = t.contactNote;
+        }
+
+    </script>
+
+</body>
+</html>
