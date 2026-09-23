@@ -428,6 +428,23 @@ footer {
 .active {
     display: inline;
 }
+.language {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: white;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .language {
+        display: inline-block;
+        position: relative;
+        z-index: 1000;
+    }
+}
 </style>
 </head>
 
