@@ -92,6 +92,10 @@ nav a:hover {
     cursor: pointer;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 /* ================= HERO ================= */
 
 .hero {
@@ -372,8 +376,56 @@ footer {
 
 @media (max-width: 800px) {
 
-    nav {
+    .header {
+        padding: 12px 20px;
+    }
+
+    .desktop-nav {
         display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255,255,255,0.98);
+        border-bottom: 1px solid #eeeeee;
+        padding: 18px 20px 22px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    }
+
+    .mobile-menu.open {
+        display: block;
+    }
+
+    .mobile-menu a {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid #eeeeee;
+        text-decoration: none;
+        color: #222;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .mobile-menu a:last-of-type {
+        border-bottom: none;
+    }
+
+    .mobile-language {
+        width: 100%;
+        margin-top: 16px;
+        padding: 10px 12px;
+        border: 1px solid #ddd;
+        background: white;
+        font-size: 14px;
+        border-radius: 4px;
     }
 
     .hero {
@@ -428,22 +480,25 @@ footer {
 .active {
     display: inline;
 }
-.language {
-    display: inline-block;
-    padding: 6px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+
+.menu-toggle {
+    display: none;
+    width: 42px;
+    height: 42px;
+    border: 1px solid #ddd;
     background: white;
-    color: #333;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
-@media (max-width: 768px) {
-    .language {
-        display: inline-block;
-        position: relative;
-        z-index: 1000;
-    }
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #111;
 }
 </style>
 </head>
@@ -462,20 +517,40 @@ footer {
             SHANYRAK
         </div>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#products">Products</a>
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
-            <a href="#contact">Contact</a>
+        <button class="menu-toggle" type="button" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-            <select class="language" onchange="changeLanguage(this.value)">
+        <nav class="desktop-nav">
+            <a href="#home" id="nav-home">Home</a>
+            <a href="#products" id="nav-products">Products</a>
+            <a href="#services" id="nav-services">Services</a>
+            <a href="#about" id="nav-about">About</a>
+            <a href="#contact" id="nav-contact">Contact</a>
+
+            <select class="language" aria-label="Language" onchange="changeLanguage(this.value)">
                 <option value="zh">中文</option>
                 <option value="en">English</option>
                 <option value="tr">Türkçe</option>
             </select>
         </nav>
 
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#home" id="mobile-nav-home" onclick="closeMobileMenu()">Home</a>
+        <a href="#products" id="mobile-nav-products" onclick="closeMobileMenu()">Products</a>
+        <a href="#services" id="mobile-nav-services" onclick="closeMobileMenu()">Services</a>
+        <a href="#about" id="mobile-nav-about" onclick="closeMobileMenu()">About</a>
+        <a href="#contact" id="mobile-nav-contact" onclick="closeMobileMenu()">Contact</a>
+
+        <select class="mobile-language" aria-label="Language" onchange="changeLanguage(this.value)">
+            <option value="zh">中文</option>
+            <option value="en">English</option>
+            <option value="tr">Türkçe</option>
+        </select>
     </div>
 </header>
 
@@ -768,6 +843,12 @@ footer {
 const translations = {
 
     zh: {
+        navHome: "首页",
+        navProducts: "产品",
+        navServices: "服务",
+        navAbout: "关于我们",
+        navContact: "联系我们",
+
         heroTitle: "专业的产品供应与贸易服务",
         heroText: "连接中国优质制造商与全球客户，提供产品采购、工厂寻找、供应链管理及出口贸易解决方案。",
         heroButton: "查看产品",
@@ -797,6 +878,12 @@ const translations = {
     },
 
     en: {
+        navHome: "Home",
+        navProducts: "Products",
+        navServices: "Services",
+        navAbout: "About",
+        navContact: "Contact",
+
         heroTitle: "Professional Product Sourcing & Trading",
         heroText: "Connecting reliable Chinese manufacturers with global customers through product sourcing, factory matching, supply chain and export solutions.",
         heroButton: "View Products",
@@ -826,6 +913,12 @@ const translations = {
     },
 
     tr: {
+        navHome: "Ana Sayfa",
+        navProducts: "Ürünler",
+        navServices: "Hizmetler",
+        navAbout: "Hakkımızda",
+        navContact: "İletişim",
+
         heroTitle: "Profesyonel Ürün Tedarik ve Dış Ticaret",
         heroText: "Çin'in kaliteli üreticilerini dünya çapındaki müşterilerle buluşturuyor, ürün tedariki, fabrika bulma, tedarik zinciri yönetimi ve ihracat ticareti çözümleri sunuyoruz.",
         heroButton: "Ürünleri Gör",
@@ -861,6 +954,22 @@ function changeLanguage(lang) {
 
     const t = translations[lang];
 
+    document.querySelectorAll(".language, .mobile-language").forEach(function(select) {
+        select.value = lang;
+    });
+
+    document.getElementById("nav-home").textContent = t.navHome;
+    document.getElementById("nav-products").textContent = t.navProducts;
+    document.getElementById("nav-services").textContent = t.navServices;
+    document.getElementById("nav-about").textContent = t.navAbout;
+    document.getElementById("nav-contact").textContent = t.navContact;
+
+    document.getElementById("mobile-nav-home").textContent = t.navHome;
+    document.getElementById("mobile-nav-products").textContent = t.navProducts;
+    document.getElementById("mobile-nav-services").textContent = t.navServices;
+    document.getElementById("mobile-nav-about").textContent = t.navAbout;
+    document.getElementById("mobile-nav-contact").textContent = t.navContact;
+
     document.getElementById("hero-title").textContent = t.heroTitle;
     document.getElementById("hero-text").textContent = t.heroText;
     document.getElementById("hero-button").textContent = t.heroButton;
@@ -885,6 +994,31 @@ function changeLanguage(lang) {
     document.getElementById("contact-title").textContent = t.contactTitle;
     document.getElementById("contact-message").textContent = t.contactMessage;
 }
+
+
+
+function toggleMobileMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const button = document.querySelector(".menu-toggle");
+    const isOpen = menu.classList.toggle("open");
+    button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+}
+
+function closeMobileMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const button = document.querySelector(".menu-toggle");
+    menu.classList.remove("open");
+    button.setAttribute("aria-expanded", "false");
+}
+
+document.querySelectorAll(".language, .mobile-language").forEach(function(select) {
+    select.addEventListener("change", function() {
+        localStorage.setItem("shanyrak-language", this.value);
+    });
+});
+
+const savedLanguage = localStorage.getItem("shanyrak-language") || "zh";
+changeLanguage(savedLanguage);
 
 </script>
 
